@@ -107,6 +107,11 @@ L'objectif du projet a été de conduire un audit complet des risques et de conc
 - [Rapport d'analyse de risques complet — DATASC.SEA (PDF, 26 pages)](deliverables/Rapport_Analyse_Risques_DATASC-SEA.pdf)
 - [Schéma d'architecture réseau cible (PDF)](deliverables/Schema_Architecture_Reseau.pdf)
 - [Plan de sauvegardes 3-2-1-1-0 (PDF)](deliverables/Plan_de_Sauvegardes.pdf)
+- [Matrice d'analyse des 41 risques (PDF)](deliverables/Analyse_des_Risques.pdf)
+- [Matrice de filtrage ACL Zero-Trust (PDF)](deliverables/Matrice_ACL.pdf)
+- [Inventaire Hardware & Systèmes d'exploitation (PDF)](deliverables/Inventaire_Hardware_OS.pdf)
+- [Plan de sauvegarde & Politique de rétention (PDF)](deliverables/Plan_de_Sauvegarde_et_Retention.pdf)
+- [Budget CAPEX / OPEX (PDF)](deliverables/Budget_CAPEX_OPEX.pdf)
 
 ---
 
