@@ -31,7 +31,7 @@ L'objectif du projet a été de conduire un audit complet des risques et de conc
 >
 > Projet réalisé en équipe de **3 personnes** couvrant les volets **Système**, **Réseau** et **Sauvegarde**.
 >
-> En tant que **référent Réseau, Sécurité périmétrique et Infrastructure physique**, j'ai pris en charge la conception complète de l'architecture cible :
+> Nous nous sommes donc partagé les tâches, j'ai pris en charge la conception complète de l'architecture cible :
 > - **Topologie réseau & haute disponibilité** : architecture Dual-WAN (`FTTO` + `FTTH`), cluster actif/passif **2× Fortinet FortiGate 60F (FGCP)** en kit rack `1U` et commutation redondée sur **2 switchs Netgear GS752TXv3 autonomes (non-stackés)** reliés en **Trunk LACP `20 Gbps`**.
 > - **Plan d'adressage & segmentation** : découpage sémantique en **12 VLANs** (dont isolation stricte du `VLAN 99` Admin et du `VLAN 220` Backup).
 > - **Sécurité périmétrique & Zero-Trust** : rédaction de la **matrice ACL complète** (`Règles 1 à 13` + `Règle 999 Deny All`), sécurisation des flux entrants de télémétrie (refus du NAT SQL `TCP 1433`), **VPN IPsec** (`FortiClient`) et Wi-Fi **WPA3-Enterprise (`802.1X` / RADIUS)** sur bornes **HPE Aruba AP-505**.
