@@ -18,22 +18,22 @@ Pour éliminer les risques critiques de perte de données (*ID 3* : disques plei
 
 L'infrastructure est bâtie sur une **architecture hybride** : les charges critiques nécessitant faible latence et contrôle local restent sur site sur **2 clusters Hyper-V redondants** (`4× Dell PowerEdge R350`), tandis que la collaboration et la messagerie migrent vers le SaaS.
 
-| Équipement / VM | Type | RAM | CPU / vCPU | Stockage | Système d'exploitation | Rôle / Applications |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `SRV-HyperV (1)` — Dell R350 | Physique (Cluster 1) | `32 Go` | `16 vCPU` | `480 Go SSD` (OS) + `2 To SSD` (VM) | `Windows Server Standard 2025` | Hôte Hyper-V (Cluster 1) |
-| `SRV-HyperV (2)` — Dell R350 | Physique (Cluster 1) | `32 Go` | `16 vCPU` | `480 Go SSD` (OS) + `2 To SSD` (VM) | `Windows Server Standard 2025` | Hôte Hyper-V (Cluster 1) |
-| `SRV-HyperV (3)` — Dell R350 | Physique (Cluster 2) | `32 Go` | `16 vCPU` | `480 Go SSD` (OS) + `2 To SSD` (VM) | `Windows Server Standard 2025` | Hôte Hyper-V (Cluster 2) |
-| `SRV-HyperV (4)` — Dell R350 | Physique (Cluster 2) | `32 Go` | `16 vCPU` | `480 Go SSD` (OS) + `2 To SSD` (VM) | `Windows Server Standard 2025` | Hôte Hyper-V (Cluster 2) |
-| `SRV-AD 1` | VM (Cluster 1) | `4 Go` | `2 vCPU` | `80 Go SSD` | `Windows Server Standard 2025` | Contrôleur de domaine principal (`AD DS` / `DNS`) |
-| `SRV-COMPTA` | VM (Cluster 1) | `12 Go` | `4 vCPU` | `250 Go SSD` | `Windows Server Standard 2025` | Comptabilité (`Sage 100c`) |
-| `SRV-SUPERVISION` | VM (Cluster 1) | `8 Go` | `4 vCPU` | `120 Go SSD` | `Ubuntu Server 24.04 LTS` | Supervision SI (`Centreon 24.10 LTS`) |
-| `SRV-AD 2` | VM (Cluster 2) | `4 Go` | `2 vCPU` | `80 Go SSD` | `Windows Server Standard 2025` | Contrôleur secondaire (`AD DS` / `DNS` / `RADIUS`) |
-| `SRV-APP` | VM (Cluster 2) | `12 Go` | `4 vCPU` | `500 Go SSD` | `Windows Server Standard 2025` | Base de données métier (`SQL Server 2022`) |
-| `SRV-VEEAM` | VM (Cluster 2) | `8 Go` | `4 vCPU` | `80 Go SSD` | `Windows Server Standard 2025` | Console & orchestration `Veeam Backup & Replication` |
-| `Synology RS2423+` | NAS rackable (`VLAN 220`) | `8 Go` | `4 cœurs` | `4× 4 To HDD` en **RAID 10 (`8 To` utiles)** | `Synology DSM` | Dépôt local des sauvegardes & snapshots immuables |
-| `SRV-WEB OVH` | Cloud (OVHcloud Pro) | Hébergé | — | — | `OVHcloud` | Hébergement du site Web vitrine |
-| `SharePoint / OneDrive` | SaaS (`Microsoft 365`) | Cloud | — | — | `Microsoft 365 Business Premium` | Remplacement du serveur de fichiers local |
-| `Exchange Online` | SaaS (`Microsoft 365`) | Cloud | — | — | `Microsoft 365 Business Premium` | Messagerie professionnelle (domaine OVH) |
+| Équipement / VM | Type | Ressources (RAM / CPU / Disque) | OS | Rôle / Applications |
+| :--- | :--- | :--- | :--- | :--- |
+| `SRV-HyperV (1)` — Dell R350 | Physique (Cluster 1) | `32 Go` / `16 vCPU`<br>`480 Go SSD` (OS) + `2 To SSD` (VM) | `Windows Server 2025` | Hôte Hyper-V (Cluster 1) |
+| `SRV-HyperV (2)` — Dell R350 | Physique (Cluster 1) | `32 Go` / `16 vCPU`<br>`480 Go SSD` (OS) + `2 To SSD` (VM) | `Windows Server 2025` | Hôte Hyper-V (Cluster 1) |
+| `SRV-HyperV (3)` — Dell R350 | Physique (Cluster 2) | `32 Go` / `16 vCPU`<br>`480 Go SSD` (OS) + `2 To SSD` (VM) | `Windows Server 2025` | Hôte Hyper-V (Cluster 2) |
+| `SRV-HyperV (4)` — Dell R350 | Physique (Cluster 2) | `32 Go` / `16 vCPU`<br>`480 Go SSD` (OS) + `2 To SSD` (VM) | `Windows Server 2025` | Hôte Hyper-V (Cluster 2) |
+| `SRV-AD 1` | VM (Cluster 1) | `4 Go` / `2 vCPU` / `80 Go SSD` | `Windows Server 2025` | Contrôleur de domaine principal (`AD DS` / `DNS`) |
+| `SRV-COMPTA` | VM (Cluster 1) | `12 Go` / `4 vCPU` / `250 Go SSD` | `Windows Server 2025` | Comptabilité (`Sage 100c`) |
+| `SRV-SUPERVISION` | VM (Cluster 1) | `8 Go` / `4 vCPU` / `120 Go SSD` | `Ubuntu Server 24.04 LTS` | Supervision SI (`Centreon 24.10 LTS`) |
+| `SRV-AD 2` | VM (Cluster 2) | `4 Go` / `2 vCPU` / `80 Go SSD` | `Windows Server 2025` | Contrôleur secondaire (`AD DS` / `DNS` / `RADIUS`) |
+| `SRV-APP` | VM (Cluster 2) | `12 Go` / `4 vCPU` / `500 Go SSD` | `Windows Server 2025` | Base de données métier (`SQL Server 2022`) |
+| `SRV-VEEAM` | VM (Cluster 2) | `8 Go` / `4 vCPU` / `80 Go SSD` | `Windows Server 2025` | Console & orchestration `Veeam Backup & Replication` |
+| `Synology RS2423+` | NAS (`VLAN 220`) | `8 Go` / `4 cœurs`<br>`4× 4 To HDD` **RAID 10 (`8 To` utiles)** | `Synology DSM` | Dépôt local des sauvegardes & snapshots immuables |
+| `SRV-WEB OVH` | Cloud (`OVHcloud`) | Hébergé | `OVHcloud Pro` | Hébergement du site Web vitrine |
+| `SharePoint / OneDrive` | SaaS (`M365`) | Cloud | `M365 Business Premium` | Remplacement du serveur de fichiers local |
+| `Exchange Online` | SaaS (`M365`) | Cloud | `M365 Business Premium` | Messagerie professionnelle (domaine OVH) |
 
 ---
 
@@ -41,16 +41,16 @@ L'infrastructure est bâtie sur une **architecture hybride** : les charges criti
 
 Les flux de sauvegarde transitent exclusivement via `SRV-VEEAM` (`10.10.100.5`) vers le `VLAN 220` isolé (`10.10.220.1`), inaccessibles depuis les postes utilisateurs :
 
-| Serveur / Système | Snapshot Horaire | Copie Quotidienne (Synology) | Copie Quotidienne (`AWS S3`) | Copie Hebdomadaire (`AWS S3` + `Veeam Cloud`) | Copie Mensuelle (`AWS Glacier`) | Copie Annuelle (`AWS Glacier`) | Politique de rétention |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **`SRV-AD 1`** | — | `23h00` | `01h00` | Week-end | `1er du mois` | `1er janvier` | Quotidienne `14 j`, hebdomadaire immuable `30 j`, archivage long terme AWS : **`3 ans`**. |
-| **`SRV-AD 2`** | — | `23h00` | `01h00` | Week-end | `1er du mois` | `1er janvier` | Quotidienne `14 j`, hebdomadaire immuable `30 j`, archivage long terme AWS : **`3 ans`**. |
-| **`SRV-COMPTA`** | `10h - 14h - 18h` | `22h00` | `01h00` | Week-end | `1er du mois` | `1er janvier` | Horaire `24 h`, quotidienne `14 j`, hebdomadaire immuable `30 j`, archivage légal AWS : **`10 ans`**. |
-| **`SRV-APP`** | `10h - 14h - 18h` | `22h00` | `01h00` | Week-end | `1er du mois` | `1er janvier` | Horaire `24 h`, quotidienne `14 j`, hebdomadaire immuable `30 j`, archivage long terme AWS : **`3 ans`**. |
-| **`SRV-SUPERVISION`** | — | `23h00` | `01h00` | Week-end | `1er du mois` | `1er janvier` | Quotidienne `14 j`, hebdomadaire immuable `30 j`, archivage long terme AWS : **`3 ans`**. |
-| **`SRV-VEEAM`** | — | `23h00` | `01h00` | Week-end | `1er du mois` | `1er janvier` | Quotidienne `14 j`, hebdomadaire immuable `30 j`, archivage long terme AWS : **`3 ans`**. |
-| **Web (`OVHcloud`)** | Paramétrage OVH | — | — | — | — | — | Sauvegardes et snapshots automatisés selon politique `OVHcloud`. |
-| **Fichiers & Mails (`M365`)** | Paramétrage M365 | `Toutes les 4 h` (Veeam) | — | Week-end (`Veeam Cloud Connect`) | — | — | Historique des versions M365, corbeille SharePoint `93 j` + sauvegarde externalisée via **Veeam Cloud Connect**. |
+| Serveur / Système | Local (Synology) | Cloud (`AWS S3` & `Veeam Cloud`) | Archivage froid (`AWS Glacier`) | Politique de rétention |
+| :--- | :--- | :--- | :--- | :--- |
+| **`SRV-AD 1`** | Quotidienne : `23h00` | Quotidienne : `01h00`<br>Hebdo : Week-end | Mensuelle : `1er du mois`<br>Annuelle : `1er janvier` | Quotidienne `14 j`, hebdo immuable `30 j`, long terme AWS : **`3 ans`**. |
+| **`SRV-AD 2`** | Quotidienne : `23h00` | Quotidienne : `01h00`<br>Hebdo : Week-end | Mensuelle : `1er du mois`<br>Annuelle : `1er janvier` | Quotidienne `14 j`, hebdo immuable `30 j`, long terme AWS : **`3 ans`**. |
+| **`SRV-COMPTA`** | Snapshots : `10h - 14h - 18h`<br>Quotidienne : `22h00` | Quotidienne : `01h00`<br>Hebdo : Week-end | Mensuelle : `1er du mois`<br>Annuelle : `1er janvier` | Horaire `24 h`, quotidienne `14 j`, hebdo immuable `30 j`, archivage légal AWS : **`10 ans`**. |
+| **`SRV-APP`** | Snapshots : `10h - 14h - 18h`<br>Quotidienne : `22h00` | Quotidienne : `01h00`<br>Hebdo : Week-end | Mensuelle : `1er du mois`<br>Annuelle : `1er janvier` | Horaire `24 h`, quotidienne `14 j`, hebdo immuable `30 j`, long terme AWS : **`3 ans`**. |
+| **`SRV-SUPERVISION`** | Quotidienne : `23h00` | Quotidienne : `01h00`<br>Hebdo : Week-end | Mensuelle : `1er du mois`<br>Annuelle : `1er janvier` | Quotidienne `14 j`, hebdo immuable `30 j`, long terme AWS : **`3 ans`**. |
+| **`SRV-VEEAM`** | Quotidienne : `23h00` | Quotidienne : `01h00`<br>Hebdo : Week-end | Mensuelle : `1er du mois`<br>Annuelle : `1er janvier` | Quotidienne `14 j`, hebdo immuable `30 j`, long terme AWS : **`3 ans`**. |
+| **Web (`OVHcloud`)** | — | Paramétrage OVH | — | Sauvegardes et snapshots automatisés selon politique `OVHcloud`. |
+| **Fichiers & Mails (`M365`)** | — | Toutes les `4 h` (`Veeam Cloud Connect`) | — | Historique des versions M365, corbeille SharePoint `93 j` + sauvegarde externalisée **Veeam Cloud Connect**. |
 
 ---
 
