@@ -1,0 +1,27 @@
+# Présentations, tableurs bruts et sources de travail
+*.pptx
+*.ppt
+*.xlsx
+*.xls
+*.csv
+*.drawio
+
+# Notes d'orateur, Q&A et brouillons
+*brouillon*
+*draft*
+*notes*
+*qa*
+*Q&A*
+
+# Fichiers temporaires Office & système
+~$*
+*.tmp
+*.bak
+*.log
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Environnements & IDE
+.vscode/
+.idea/
